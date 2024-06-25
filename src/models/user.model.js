@@ -2,13 +2,13 @@ import mongoose from "mongoose";
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 
-const userSchema = mongoose.Schema(
+const userSchema = new mongoose.Schema(
     {
         username: {
             type: String,
             required: true,
             unique: true,
-            lowecase: true,
+            lowercase: true,
             trim: true,
             index: true
         },
@@ -17,11 +17,11 @@ const userSchema = mongoose.Schema(
             type: String,
             required: true,
             unique: true,
-            lowecase: true,
+            lowercase: true,
             trim: true,
         },
 
-        fullname: {
+        fullName: {
             type: String,
             required: true,
             trim: true,
@@ -30,7 +30,7 @@ const userSchema = mongoose.Schema(
 
         avatar: {
             type: String,
-            required: false,
+            required: true,
         },
 
         coverImage: {
@@ -39,7 +39,7 @@ const userSchema = mongoose.Schema(
 
         watchHistory: [
             {
-                type: mongoose.Schema.Types.OnjectId,
+                type: mongoose.Schema.Types.ObjectId,
                 ref: "Video"
             }
         ],
@@ -97,4 +97,4 @@ userSchema.methods.generateRefreshToken = function() {
     )
 }
 
-export const User = mongoose.model("User", userSchema)
+export const User = mongoose.model("User", userSchema);

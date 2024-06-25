@@ -1,4 +1,6 @@
-class ApiError extends errors {
+import { Error } from "mongoose"
+
+class ApiErrors extends Error{
     constructor(
         statusCode,
         message= "Something went wrong",
@@ -9,7 +11,7 @@ class ApiError extends errors {
         this.statusCode = statusCode
         this.data = null
         this.message = message
-        this.success = success
+        this.success = false
         this.errors = errors
 
         if (stack) {
@@ -20,4 +22,4 @@ class ApiError extends errors {
     }
 }
 
-export {ApiError}
+export { ApiErrors }
